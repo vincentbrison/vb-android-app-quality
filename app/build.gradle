@@ -1,0 +1,49 @@
+apply plugin: 'android'
+apply from: '../config/quality.gradle'
+
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion '19.0.3'
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 19
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+
+    productFlavors {
+
+        red {
+            packageName 'vb.android.app.quality.red'
+        }
+
+        blue {
+            packageName 'vb.android.app.quality.blue'
+        }
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    compile 'vb.android.library.cache.lib:vbcache:0.0.1@aar'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
