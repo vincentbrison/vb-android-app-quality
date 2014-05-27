@@ -73,13 +73,13 @@ If your android library is hosted in personal maven repository (as it is for my 
 do not forget to add the url of the repository :
 
  ```gradle
-repositories {
+ repositories {
         mavenCentral()
         maven{
             url 'https://github.com/vincentbrison/vb-maven/raw/master/release/'
         }
     }
-     ```
+ ```
 
 Testing
 -------
