@@ -86,6 +86,11 @@ Testing
 Work in progress...
  
 
+To go further
+-------------
+This project is based on these two other projects, which are awesome. Consider take a look at them :
+ - [Quality-Tools-for-Android](https://github.com/stephanenicolas/Quality-Tools-for-Android).
+ - [volley-examples](https://github.com/marcoRS/volley-examples).
 
 License
 =======
