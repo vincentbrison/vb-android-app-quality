@@ -45,15 +45,15 @@ task findbugs(type: FindBugs) {
 task pmd(type: Pmd) {
     ruleSetFiles = files("${project.rootDir}/config/quality/pmd/pmd-ruleset.xml")
     ignoreFailures = false
-    ruleSets = ["basic", "braces", "strings"]
+    ruleSets = []
 
     source 'src'
     include '**/*.java'
     exclude '**/gen/**'
 
     reports {
-        xml.enabled = true
-        html.enabled = false
+        xml.enabled = false
+        html.enabled = true
         xml {
             destination "$project.buildDir/reports/pmd/pmd.xml"
         }

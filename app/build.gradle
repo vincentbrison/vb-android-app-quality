@@ -1,10 +1,10 @@
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 apply from: '../config/quality.gradle'
 
 
 android {
     compileSdkVersion 19
-    buildToolsVersion '19.0.3'
+    buildToolsVersion '19.1.0'
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 19
@@ -28,11 +28,11 @@ android {
     productFlavors {
 
         red {
-            packageName 'vb.android.app.quality.red'
+            applicationId 'vb.android.app.quality.red'
         }
 
         blue {
-            packageName 'vb.android.app.quality.blue'
+            applicationId 'vb.android.app.quality.blue'
         }
     }
 }
@@ -44,6 +44,5 @@ repositories {
 }
 
 dependencies {
-    compile 'vb.android.library.cache.lib:vbcache:0.0.1@aar'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }

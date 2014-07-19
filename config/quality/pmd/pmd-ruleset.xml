@@ -1,9 +1,13 @@
 <?xml version="1.0"?>
-<ruleset name="Custom ruleset"
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Custom ruleset"
     xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
-  <description>
-  This ruleset checks my code for bad stuff
-  </description>
+    <description>
+        This ruleset checks my code for bad stuff
+    </description>
+
+    <rule ref="rulesets/basic.xml">
+        <!-- empty if statements are useful to skip actions taken by the else (if(s)) -->
+        <exclude name="EmptyIfStmt" />
+    </rule>
 </ruleset>
