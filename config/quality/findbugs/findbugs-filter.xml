@@ -15,16 +15,5 @@
         </Not>
     </Match>
 
-    <Match>
-        <Package name="com.actionbarsherlock.internal.nineoldandroids.animation" />
-    </Match>
-
-    <Match>
-        <Package name="com.actionbarsherlock.view" />
-    </Match>
-
-    <Match>
-        <Package name="com.actionbarsherlock.internal.widget" />
-    </Match>
 
 </FindBugsFilter>
