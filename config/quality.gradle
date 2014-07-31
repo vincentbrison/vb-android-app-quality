@@ -45,7 +45,7 @@ task findbugs(type: FindBugs) {
 task pmd(type: Pmd) {
     ruleSetFiles = files("${project.rootDir}/config/quality/pmd/pmd-ruleset.xml")
     ignoreFailures = false
-    ruleSets = ["basic", "braces", "strings"]
+    ruleSets = []
 
     source 'src'
     include '**/*.java'
