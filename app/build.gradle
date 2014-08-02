@@ -4,7 +4,7 @@ apply from: '../config/quality.gradle'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion '19.1.0'
+    buildToolsVersion '19.1'
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 19

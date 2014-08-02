@@ -1,13 +1,28 @@
 <?xml version="1.0"?>
-<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Custom ruleset"
-    xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
-    xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
-    <description>
-        This ruleset checks my code for bad stuff
-    </description>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Android Application Rules"
+    xmlns="http://pmd.sf.net/ruleset/1.0.0"
+    xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd"
+    xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd">
 
-    <rule ref="rulesets/basic.xml">
-        <!-- empty if statements are useful to skip actions taken by the else (if(s)) -->
-        <exclude name="EmptyIfStmt" />
+    <description>Custom ruleset for Android application</description>
+
+    <exclude-pattern>.*/R.java</exclude-pattern>
+    <exclude-pattern>.*/gen/.*</exclude-pattern>
+
+    <rule ref="rulesets/android.xml" />
+    <rule ref="rulesets/clone.xml" />
+    <rule ref="rulesets/finalizers.xml" />
+    <rule ref="rulesets/imports.xml" />
+    <rule ref="rulesets/logging-java.xml" />
+    <rule ref="rulesets/braces.xml" />
+    <rule ref="rulesets/strings.xml" />
+    <rule ref="rulesets/basic.xml" />
+    <rule ref="rulesets/naming.xml">
+        <exclude name="AbstractNaming" />
+        <exclude name="LongVariable" />
+        <exclude name="LongMethodName" />
+        <exclude name="ShortMethodName" />
+        <exclude name="ShortVariable" />
+        <exclude name="VariableNamingConventions" />
     </rule>
 </ruleset>
