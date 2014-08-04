@@ -1,15 +1,11 @@
-Caution
-=======
-You are on the demo branch of the project, which is used to illustrate my articles about Gradle on my [website](http://vincentbrison.com).
-If you want get the latest stable version of my work about Gradle, quality, and Android, please use the [master branch](https://github.com/vincentbrison/vb-android-app-quality/tree/master).
-
-
 vb-android-app-quality
 ======================
 
 Sample android project using Gradle, with basic quality tools set up. 
 
 This project for provide a clean base to any Gradle Android project.
+
+This project also illustrate my articles about Gradle on my [website](http://vincentbrison.com).
 
 Quality
 -------
