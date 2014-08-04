@@ -2,8 +2,8 @@ apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
 apply plugin: 'pmd'
 
-// Add checkstyle, findbugs, and pmd to the check task.
-check.dependsOn 'checkstyle', 'findbugs', 'pmd'
+// Add checkstyle, findbugs, pmd and lint to the check task.
+check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'
 
 
 task checkstyle(type: Checkstyle) {
@@ -66,6 +66,8 @@ task pmd(type: Pmd) {
 android {
     lintOptions {
         abortOnError true
+
+        lintConfig file("${project.rootDir}/config/quality/lint/lint.xml")
 
         // if true, generate an HTML report (with issue explanations, sourcecode, etc)
         htmlReport true
