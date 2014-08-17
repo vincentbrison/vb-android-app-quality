@@ -42,7 +42,7 @@ Flavor
 The project itself is a demo of the flavor system. Flavor are defined in the [build.gradle](app/build.gradle).
 You need to provide a least a name to the flavor : 
 
- ```gradle
+ ```groovy
  productFlavors {
         red {
             packageName 'vb.android.app.quality.red'
@@ -64,7 +64,7 @@ AAR
 To use android library in your project, just add the dependence in you gradle file, as it is made in
 the [build.gradle](app/build.gradle) of the module app :
 
- ```gradle
+ ```groovy
 dependencies {
     compile 'vb.android.library.cache.lib:vbcache:0.0.1@aar'
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -74,7 +74,7 @@ dependencies {
 If your android library is hosted in personal maven repository (as it is for my lib [vbcache](https://github.com/vincentbrison/vb-android-library-cache)),
 do not forget to add the url of the repository :
 
- ```gradle
+ ```groovy
  repositories {
         mavenCentral()
         maven{
