@@ -61,27 +61,7 @@ a directory under the src folder, name it with the name of your flavor, and put 
 
 AAR
 ---
-To use android library in your project, just add the dependence in you gradle file, as it is made in
-the [build.gradle](app/build.gradle) of the module app :
-
- ```groovy
-dependencies {
-    compile 'vb.android.library.cache.lib:vbcache:0.0.1@aar'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-}
- ```
-
-If your android library is hosted in personal maven repository (as it is for my lib [vbcache](https://github.com/vincentbrison/vb-android-library-cache)),
-do not forget to add the url of the repository :
-
- ```groovy
- repositories {
-        mavenCentral()
-        maven{
-            url 'https://github.com/vincentbrison/vb-maven/raw/master/release/'
-        }
-    }
- ```
+Work in progress...
 
 Testing
 -------
