@@ -45,4 +45,5 @@ repositories {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.2.1'
 }
