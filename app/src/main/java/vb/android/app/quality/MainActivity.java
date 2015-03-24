@@ -21,5 +21,8 @@ public class MainActivity extends Activity {
 
             }
         }
+
+        NumberGenerator numberGenerator = new NumberGenerator();
+        numberGenerator.generateAnyNumber();
     }
 }
