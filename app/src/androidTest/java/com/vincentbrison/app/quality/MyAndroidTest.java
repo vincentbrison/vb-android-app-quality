@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
-import vb.android.app.quality.NumberGenerator;
+import vb.android.app.quality.Greeting;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
@@ -21,36 +21,36 @@ import static org.mockito.Mockito.when;
 public class MyAndroidTest {
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
     }
 
     @Test
-    public void testContext() {
+    public void testContextShouldNotBeNull() {
         assertThat(InstrumentationRegistry.getContext()).isNotNull();
     }
 
     @Test
-    public void testTargetContext() {
+    public void testTargetContextShouldNotBeNull() {
         assertThat(InstrumentationRegistry.getTargetContext()).isNotNull();
     }
 
+    /**
+     * this is a simple example of mocking method of an interface
+     */
     @Test
-    public void testShouldGenerate63() {
-        // example of mocking classes
-        NumberGenerator mockedNumberGenerator = Mockito.mock(NumberGenerator.class);
-        when(mockedNumberGenerator.generateAnyNumber()).thenReturn(63);
-        // when it's NOT mocked, it should return 42 instead of 63
-        assertThat(mockedNumberGenerator.generateAnyNumber()).isEqualTo(63);
-    }
+    public void testShouldGenerateMockedGreeting() {
+        // given
+        Greeting greeting = Mockito.mock(Greeting.class);
+        String givenGreeting = "Hello World!";
 
-    @Test
-    public void testShouldGenerate42() {
-        NumberGenerator numberGenerator = new NumberGenerator();
-        int generatedNumber = numberGenerator.generateAnyNumber();
-        assertThat(generatedNumber).isEqualTo(42);
+        // when
+        when(greeting.generate()).thenReturn(givenGreeting);
+
+        // then
+        assertThat(greeting.generate()).isEqualTo(givenGreeting);
     }
 }
