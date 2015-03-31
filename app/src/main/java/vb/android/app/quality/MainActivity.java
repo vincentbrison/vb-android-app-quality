@@ -13,16 +13,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView tw = (TextView) findViewById(R.id.textView);
-        tw.setText(Constants.FLAVOR);
-
-        if (2 > 3) {
-            if (4 > 2) {
-
-            }
-        }
-
-        NumberGenerator numberGenerator = new NumberGenerator();
-        numberGenerator.generateAnyNumber();
+        TextView textView = (TextView) findViewById(R.id.textView);
+        textView.setText(Constants.FLAVOR);
     }
 }
