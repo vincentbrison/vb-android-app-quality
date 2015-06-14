@@ -1,8 +1,10 @@
-package vb.android.app.quality;
+package vb.android.app.quality.pi;
 
 import android.os.AsyncTask;
 
 import java.lang.ref.WeakReference;
+
+import vb.android.app.quality.Pi;
 
 public class PiTask extends AsyncTask<Void, Void, Double> {
 

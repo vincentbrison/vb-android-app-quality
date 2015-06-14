@@ -9,8 +9,8 @@ import com.robotium.solo.Solo;
 import org.mockito.Mockito;
 
 import vb.android.app.quality.Constants;
-import vb.android.app.quality.MainActivity;
-import vb.android.app.quality.PiGenerator;
+import vb.android.app.quality.ui.MainActivity;
+import vb.android.app.quality.pi.PiGenerator;
 import vb.android.app.quality.R;
 
 /**

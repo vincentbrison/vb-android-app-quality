@@ -2,6 +2,8 @@ package vb.android.app.quality;
 
 import java.math.BigInteger ;
 
+import vb.android.app.quality.pi.PiGenerator;
+
 /**
  * Very slow class to compute PI.
  */

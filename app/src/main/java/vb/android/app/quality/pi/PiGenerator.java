@@ -1,4 +1,4 @@
-package vb.android.app.quality;
+package vb.android.app.quality.pi;
 
 /**
  * Interface for generating greeting
