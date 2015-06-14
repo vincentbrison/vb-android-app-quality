@@ -15,15 +15,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/flavor"
+        android:text="@string/desc_pi"
         android:textSize="30sp"
         android:textStyle="bold" />
 
     <EditText
+        android:inputType="number"
         android:id="@+id/editTextDigits"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
+        android:text="@string/compute"
         android:id="@+id/buttonCompute"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -31,7 +34,18 @@
     <TextView
         android:id="@+id/textViewValue"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="@string/rank"
+        android:id="@+id/buttonSendPi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="@string/share"
+        android:id="@+id/buttonShareResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="desc_pi">Enter the number of iteration to approximate Pi : </string>
+    <string name="max_desc">iteration(s)</string>
+</resources>

@@ -30,12 +30,12 @@ android {
     }
 
     productFlavors {
-        red {
-            applicationId 'vb.android.app.quality.red'
+        exactPi {
+            applicationId 'vb.android.app.quality.exactPi'
         }
 
-        blue {
-            applicationId 'vb.android.app.quality.blue'
+        approximationPi {
+            applicationId 'vb.android.app.quality.approximationPi'
         }
     }
 }

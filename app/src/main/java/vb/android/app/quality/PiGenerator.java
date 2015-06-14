@@ -5,10 +5,9 @@ package vb.android.app.quality;
  */
 public interface PiGenerator {
     /**
-     * Compute maxDigits digits of Pi. This method is very slow and should be used to compute Pi in
-     * an efficient way.
-     * @param maxDigits is the number of digits of Pi to compute.
+     * Compute Pi.
+     * @param max is used to parameter the algorithm used for computation (max iteration, max digits...).
      * @return the value of Pi.
      */
-    public double calcPiDigits(int maxDigits);
+    public double calcPiDigits(int max);
 }

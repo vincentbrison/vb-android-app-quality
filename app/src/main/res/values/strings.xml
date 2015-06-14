@@ -2,5 +2,9 @@
 <resources>
 
     <string name="app_name">vb-android-app-quality</string>
-
+    <string name="desc_pi">Enter the number of digits of Pi to compute : </string>
+    <string name="compute">Compute</string>
+    <string name="rank">Rank this result online</string>
+    <string name="share">Share the result</string>
+    <string name="computing">Pi is computing</string>
 </resources>
