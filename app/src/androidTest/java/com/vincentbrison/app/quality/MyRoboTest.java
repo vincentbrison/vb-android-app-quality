@@ -6,8 +6,11 @@ import android.widget.TextView;
 import com.robotium.solo.Condition;
 import com.robotium.solo.Solo;
 
+import org.mockito.Mockito;
+
 import vb.android.app.quality.Constants;
 import vb.android.app.quality.MainActivity;
+import vb.android.app.quality.PiGenerator;
 import vb.android.app.quality.R;
 
 /**
@@ -35,6 +38,9 @@ public class MyRoboTest extends ActivityInstrumentationTestCase2 {
 
     public void testUI() {
         solo.waitForActivity(MainActivity.class);
+        PiGenerator pi = Mockito.mock(PiGenerator.class);
+        Mockito.when(pi.calcPiDigits(5)).thenReturn(3.1415);
+
         final TextView tv = (TextView) solo.getView(R.id.textView);
         solo.waitForCondition(new Condition() {
             @Override

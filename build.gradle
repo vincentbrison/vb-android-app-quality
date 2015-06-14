@@ -5,15 +5,12 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.1.0'
+        classpath 'com.android.tools.build:gradle:1.2.3'
     }
 }
 
 allprojects {
     repositories {
         mavenCentral()
-        maven{
-            url 'https://github.com/vincentbrison/vb-maven/raw/master/release/'
-        }
     }
 }

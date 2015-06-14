@@ -48,11 +48,10 @@ repositories {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.jakewharton:butterknife:6.1.0'
+    testCompile 'junit:junit:4.12'
+
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.2.1' // for UI tests
-    androidTestCompile 'com.android.support.test:testing-support-lib:0.1' // for Unit Tests
-    androidTestCompile('com.google.truth:truth:0.25') { // Google's fluent assertion library
-        exclude group: 'junit' // Android has JUnit built in
-    }
     androidTestCompile 'com.google.dexmaker:dexmaker:1.0' // required by Mockito
     androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.0' // required by Mockito
     androidTestCompile 'org.mockito:mockito-core:1.9.5' // for creating mocks
