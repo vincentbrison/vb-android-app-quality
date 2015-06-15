@@ -18,6 +18,7 @@ public final class DataModule {
     public APIInterface provideApi() {
             return new RestAdapter.Builder()
                     .setEndpoint("http://echo.jsontest.com")
+                    .setLogLevel(RestAdapter.LogLevel.FULL)
                     .build()
                     .create(APIInterface.class);
     }

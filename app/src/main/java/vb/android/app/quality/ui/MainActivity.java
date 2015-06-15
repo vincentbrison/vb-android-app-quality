@@ -10,10 +10,14 @@ import android.widget.TextView;
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
+import vb.android.app.quality.Injector;
 import vb.android.app.quality.R;
 import vb.android.app.quality.app.QualityApplication;
+import vb.android.app.quality.dagger.DaggerAppComponent;
 import vb.android.app.quality.pi.PiTask;
 import vb.android.app.quality.rest.APIInterface;
 import vb.android.app.quality.rest.ResponseRank;
@@ -33,29 +37,29 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
 
     protected State mState = State.IDDLE;
 
-    //@InjectView(R.id.textViewName)
+    @InjectView(R.id.textViewName)
     protected TextView mTextViewName;
 
-    //@InjectView(R.id.textViewValue)
+    @InjectView(R.id.textViewValue)
     protected TextView mTextViewValue;
 
-    //@InjectView(R.id.buttonCompute)
+    @InjectView(R.id.buttonCompute)
     protected Button mButtonCompute;
 
-    //@InjectView(R.id.editTextDigits)
+    @InjectView(R.id.editTextDigits)
     protected EditText mEditTextDigits;
 
-    //@InjectView(R.id.buttonSendPi)
+    @InjectView(R.id.buttonSendPi)
     protected Button mButtonSendPi;
 
-    //@InjectView(R.id.buttonShareResult)
+    @InjectView(R.id.buttonShareResult)
     protected Button mButtonShare;
 
-    //@InjectView(R.id.textviewRank)
+    @InjectView(R.id.textviewRank)
     protected TextView mTextViewRank;
 
     @Inject
-    APIInterface mApi;
+    protected APIInterface mApi;
 
     protected int mMax;
     protected long mStartTime;
@@ -66,8 +70,8 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_main);
-        //ButterKnife.inject(this);
-        QualityApplication.getGraph().inject(this);
+        ButterKnife.inject(this);
+        Injector.INSTANCE.getApplicationComponent().inject(this);
         mButtonSendPi.setEnabled(false);
         mButtonShare.setEnabled(false);
         mButtonCompute.setOnClickListener(new View.OnClickListener() {
