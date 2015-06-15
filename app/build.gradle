@@ -69,6 +69,7 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
 
+    androidTestCompile 'com.android.support.test:runner:0.3'
     androidTestCompile 'com.squareup.okhttp:mockwebserver:2.4.0' // For creating a mockable web serveR.
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.2.1' // for UI tests
     androidTestCompile 'com.google.dexmaker:dexmaker:1.0' // required by Mockito

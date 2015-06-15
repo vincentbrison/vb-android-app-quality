@@ -15,7 +15,7 @@ public class QualityApplication extends Application {
     public void onCreate() {
         super.onCreate();
         sApp = this;
-        Injector.INSTANCE.initializeApplicationComponent(this);
+        Injector.INSTANCE.initializeApplicationComponent();
     }
 
     public static QualityApplication getApp() {

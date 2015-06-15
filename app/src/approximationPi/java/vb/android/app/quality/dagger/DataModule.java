@@ -5,6 +5,8 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import retrofit.RestAdapter;
+import vb.android.app.quality.R;
+import vb.android.app.quality.app.QualityApplication;
 import vb.android.app.quality.rest.APIInterface;
 
 /**

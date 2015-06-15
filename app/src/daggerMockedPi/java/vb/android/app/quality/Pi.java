@@ -14,6 +14,6 @@ public final class Pi implements PiGenerator {
 
     @Override
     public double calcPiDigits(int maxDigits){
-        return 3.14;
+        return 3.1415;
     }
 }
