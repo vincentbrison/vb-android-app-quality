@@ -1,12 +1,14 @@
 package vb.android.app.quality.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -16,8 +18,6 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import vb.android.app.quality.Injector;
 import vb.android.app.quality.R;
-import vb.android.app.quality.app.QualityApplication;
-import vb.android.app.quality.dagger.DaggerAppComponent;
 import vb.android.app.quality.pi.PiTask;
 import vb.android.app.quality.rest.APIInterface;
 import vb.android.app.quality.rest.ResponseRank;
@@ -28,14 +28,14 @@ import vb.android.app.quality.rest.ResponseRank;
 public class MainActivity extends Activity implements PiTask.PiTaskCallback, Observer<ResponseRank> {
 
     private enum State {
-        IDDLE,
+        IDLE,
         IS_COMPUTING,
         IS_PI_COMPUTED,
         IS_SENDING,
         IS_RANK_READY,
     }
 
-    protected State mState = State.IDDLE;
+    protected State mState = State.IDLE;
 
     @InjectView(R.id.textViewName)
     protected TextView mTextViewName;
@@ -64,6 +64,7 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
     protected int mMax;
     protected long mStartTime;
     protected long mTime;
+    protected ResponseRank mResponseRank;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +78,7 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
         mButtonCompute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!mState.equals(State.IS_COMPUTING)) {
+                if (!mState.equals(State.IS_COMPUTING) || mState.equals(State.IS_SENDING)) {
                     setState(State.IS_COMPUTING);
                     int digits = Integer.parseInt(mEditTextDigits.getText().toString());
                     PiTask task = new PiTask(digits, MainActivity.this);
@@ -91,17 +92,23 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
         mButtonSendPi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mApi.getRank(getString(R.string.algo), mTime, mMax).observeOn(AndroidSchedulers.mainThread()).subscribe(MainActivity.this);
+                if (!mState.equals(State.IS_COMPUTING) || mState.equals(State.IS_SENDING)) {
+                    setState(State.IS_SENDING);
+                    mApi.getRank(getString(R.string.algo), mTime, mMax).observeOn(AndroidSchedulers.mainThread()).subscribe(MainActivity.this);
+                }
             }
         });
 
         mButtonShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intentShare = new Intent(Intent.ACTION_SEND);
-                //intentShare.setType("text/plain");
-                //intentShare.putExtra(Intent.EXTRA_SUBJECT, news.getTitle());
-                //intentShare.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_news) + " " + news.getUrl());
+                if (mState.equals(State.IS_RANK_READY)) {
+                    Intent intentShare = new Intent(Intent.ACTION_SEND);
+                    intentShare.setType("text/plain");
+                    intentShare.putExtra(Intent.EXTRA_SUBJECT, "My rank on Pi computing bench");
+                    intentShare.putExtra(Intent.EXTRA_TEXT, "My rank is " + mResponseRank.getRank() + " on Pi computing bench.");
+                    startActivity(intentShare);
+                }
             }
         });
     }
@@ -128,6 +135,18 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
             mButtonSendPi.setEnabled(false);
             mButtonShare.setEnabled(false);
             setProgressBarIndeterminateVisibility(true);
+        } else if (state.equals(State.IS_SENDING)) {
+            mEditTextDigits.setEnabled(false);
+            mButtonCompute.setEnabled(false);
+            mButtonSendPi.setEnabled(false);
+            mButtonShare.setEnabled(false);
+            setProgressBarIndeterminateVisibility(true);
+        } else if (state.equals(State.IS_RANK_READY)) {
+            mEditTextDigits.setEnabled(true);
+            mButtonCompute.setEnabled(true);
+            mButtonSendPi.setEnabled(false);
+            mButtonShare.setEnabled(true);
+            setProgressBarIndeterminateVisibility(false);
         }
     }
 
@@ -138,11 +157,14 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
 
     @Override
     public void onError(Throwable e) {
-
+        Toast.makeText(this, "Network error", Toast.LENGTH_SHORT).show();
+        setState(State.IS_PI_COMPUTED);
     }
 
     @Override
     public void onNext(ResponseRank responseRank) {
+        setState(State.IS_RANK_READY);
+        mResponseRank = responseRank;
         mTextViewRank.setText("Your rank is " + responseRank.getRank());
     }
 }

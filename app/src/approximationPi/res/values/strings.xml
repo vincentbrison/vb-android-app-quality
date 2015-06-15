@@ -3,4 +3,5 @@
     <string name="desc_pi">Enter the number of iteration to approximate Pi : </string>
     <string name="max_desc">iteration(s)</string>
     <string name="algo">approximation</string>
+    <string name="url">http://echo.jsontest.com</string>
 </resources>
