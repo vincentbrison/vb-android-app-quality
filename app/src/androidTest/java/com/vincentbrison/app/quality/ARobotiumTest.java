@@ -39,8 +39,6 @@ public class ARobotiumTest extends ActivityInstrumentationTestCase2 {
 
     public void testThatPIComputationEnableRanking() {
         solo.waitForActivity(MainActivity.class);
-        PiGenerator pi = Mockito.mock(PiGenerator.class);
-        Mockito.when(pi.calcPiDigits(5)).thenReturn(3.1415);
 
         final EditText editText = (EditText) solo.getView(R.id.editTextDigits);
         final Button buttonSendPI = (Button) solo.getView(R.id.buttonSendPi);
