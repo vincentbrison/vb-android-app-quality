@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 public class PiTest extends TestCase {
 
     public void testCalcPiDigits() throws Exception {
-        if (Contants.sFlavor.equals(Flavors.APPROXIMATION_PI)) {
+        if (Contants.FLAVOR.equals(Flavors.APPROXIMATION_PI)) {
             double pi = new Pi().calcPiDigits(500);
             assertTrue("After 500 interations, computed Pi (" +
                     pi +

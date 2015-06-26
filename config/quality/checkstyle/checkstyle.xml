@@ -294,7 +294,7 @@
             <property name="allowMissingThrowsTags" value="false"/>
             <property name="allowMissingReturnTag" value="false"/>
             <property name="allowMissingJavadoc" value="false"/>
-            <property name="allowMissingPropertyJavadoc" value="false"/>
+            <property name="allowMissingPropertyJavadoc" value="true"/>
             <property name="logLoadErrors" value="true"/>
             <property name="suppressLoadErrors" value="false"/>
             <property name="tokens" value="METHOD_DEF, CTOR_DEF"/>

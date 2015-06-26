@@ -6,23 +6,27 @@ import java.lang.ref.WeakReference;
 
 import vb.android.app.quality.Pi;
 
+/**
+ * AsyncTask to compute PI.
+ */
 public class PiTask extends AsyncTask<Void, Void, Double> {
 
-    public interface PiTaskCallback {
-        public void onPiComputed(double pi);
-    }
-
-    private int mDigits;
+    private int mMax;
     private WeakReference<PiTaskCallback> mCallback;
 
-    public PiTask(int digits, PiTaskCallback callback) {
-        mDigits = digits;
+    /**
+     * Configure the computation task.
+     * @param max is a limitation give to the computation.
+     * @param callback will be trigger when computation end.
+     */
+    public PiTask(int max, PiTaskCallback callback) {
+        mMax = max;
         mCallback = new WeakReference<>(callback);
     }
 
     @Override
     protected Double doInBackground(Void... params) {
-        return new Pi().calcPiDigits(mDigits);
+        return new Pi().calcPiDigits(mMax);
     }
 
     @Override
@@ -31,5 +35,16 @@ public class PiTask extends AsyncTask<Void, Void, Double> {
         if (mCallback.get() != null) {
             mCallback.get().onPiComputed(aDouble);
         }
+    }
+
+    /**
+     * Callback interface used when PI is computed.
+     */
+    public interface PiTaskCallback {
+        /**
+         * Call when PI is computed.
+         * @param pi is the value of pi which was computed.
+         */
+        void onPiComputed(double pi);
     }
 }

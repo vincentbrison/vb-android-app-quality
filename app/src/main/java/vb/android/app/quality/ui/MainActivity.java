@@ -94,7 +94,8 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
             public void onClick(View v) {
                 if (!mState.equals(State.IS_COMPUTING) || mState.equals(State.IS_SENDING)) {
                     setState(State.IS_SENDING);
-                    mApi.getRank(getString(R.string.algo), mTime, mMax).observeOn(AndroidSchedulers.mainThread()).subscribe(MainActivity.this);
+                    mApi.getRank(getString(R.string.algo), mTime, mMax)
+                            .observeOn(AndroidSchedulers.mainThread()).subscribe(MainActivity.this);
                 }
             }
         });
@@ -106,7 +107,8 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
                     Intent intentShare = new Intent(Intent.ACTION_SEND);
                     intentShare.setType("text/plain");
                     intentShare.putExtra(Intent.EXTRA_SUBJECT, "My rank on Pi computing bench");
-                    intentShare.putExtra(Intent.EXTRA_TEXT, "My rank is " + mResponseRank.getRank() + " on Pi computing bench.");
+                    intentShare.putExtra(
+                            Intent.EXTRA_TEXT, "My rank is " + mResponseRank.getRank() + " on Pi computing bench.");
                     startActivity(intentShare);
                 }
             }

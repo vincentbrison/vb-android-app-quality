@@ -18,6 +18,10 @@ public class QualityApplication extends Application {
         InjectorHelper.initializeApplicationComponent(this);
     }
 
+    /**
+     * Return the application context.
+     * @return the application context.
+     */
     public static QualityApplication getApp() {
         return sApp;
     }

@@ -1,8 +1,15 @@
 package vb.android.app.quality;
 
 /**
- * Created by Brize on 15/06/2015.
+ * Hold constants with application scope purpose.
  */
-public class Contants {
-    public static final Flavors sFlavor = Flavors.APPROXIMATION_PI;
+public final class Contants {
+
+    /**
+     * Define the current flavor.
+     */
+    public static final Flavors FLAVOR = Flavors.APPROXIMATION_PI;
+
+    private Contants() {
+    }
 }
