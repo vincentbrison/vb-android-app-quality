@@ -5,7 +5,12 @@
     "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
 
 <suppressions>
-    <suppress files="R.java" checks="[a-zA-Z0-9]*"/>
-    <suppress files="BuildConfig.java" checks="[a-zA-Z0-9]*"/>
-    <suppress files="Test" checks="[a-zA-Z0-9]*"/>
+    <suppress checks="[a-zA-Z0-9]*" files="R.java" />
+    <suppress checks="[a-zA-Z0-9]*" files="BuildConfig.java" />
+    <suppress checks="[a-zA-Z0-9]*" files="Test" />
+    <suppress checks="[a-zA-Z0-9]*" files="Dagger*" />
+    <suppress checks="[a-zA-Z0-9]*" files=".*_ProvideApiFactory.java" />
+    <suppress checks="[a-zA-Z0-9]*" files=".*ViewInjector.java" />
+    <suppress checks="[a-zA-Z0-9]*" files=".*_MembersInjector.java" />
+
 </suppressions>

@@ -14,10 +14,8 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
-import vb.android.app.quality.Injector;
+import vb.android.app.quality.InjectorHelper;
 import vb.android.app.quality.R;
-import vb.android.app.quality.app.QualityApplication;
-import vb.android.app.quality.dagger.DaggerAppComponent;
 import vb.android.app.quality.pi.PiTask;
 import vb.android.app.quality.rest.APIInterface;
 import vb.android.app.quality.rest.ResponseRank;
@@ -71,7 +69,7 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
-        Injector.INSTANCE.getApplicationComponent().inject(this);
+        InjectorHelper.getApplicationComponent().inject(this);
         mButtonSendPi.setEnabled(false);
         mButtonShare.setEnabled(false);
         mButtonCompute.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +89,8 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
         mButtonSendPi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mApi.getRank(getString(R.string.algo), mTime, mMax).observeOn(AndroidSchedulers.mainThread()).subscribe(MainActivity.this);
+                mApi.getRank(getString(R.string.algo), mTime, mMax)
+                        .observeOn(AndroidSchedulers.mainThread()).subscribe(MainActivity.this);
             }
         });
 
@@ -109,7 +108,8 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
     @Override
     public void onPiComputed(double pi) {
         mTime = System.currentTimeMillis() - mStartTime;
-        String value = "Pi = " + pi + "(computed in " + mTime + " ms, for " + mMax + " " + getString(R.string.max_desc) + ")";
+        String value = "Pi = " + pi + "(computed in " + mTime
+                + " ms, for " + mMax + " " + getString(R.string.max_desc) + ")";
         mTextViewValue.setText(value);
         setState(State.IS_PI_COMPUTED);
     }

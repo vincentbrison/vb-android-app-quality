@@ -2,7 +2,7 @@ package vb.android.app.quality.app;
 
 import android.app.Application;
 
-import vb.android.app.quality.Injector;
+import vb.android.app.quality.InjectorHelper;
 
 /**
  * Created by Brize on 14/06/2015.
@@ -15,7 +15,7 @@ public class QualityApplication extends Application {
     public void onCreate() {
         super.onCreate();
         sApp = this;
-        Injector.INSTANCE.initializeApplicationComponent(this);
+        InjectorHelper.initializeApplicationComponent(this);
     }
 
     public static QualityApplication getApp() {

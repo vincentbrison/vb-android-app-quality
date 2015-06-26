@@ -303,7 +303,7 @@
         <!-- Checks that variables have Javadoc comments. !-->
         <!-- See http://checkstyle.sf.net/config_javadoc.html#JavadocVariable !-->
         <module name="JavadocVariable">
-            <property name="scope" value="package"/>
+            <property name="scope" value="public"/>
             <!--
             <property name="excludeScope" value=""/>
             !-->
@@ -325,7 +325,7 @@
         <!-- See http://checkstyle.sf.net/config_design.html !-->
         <module name="VisibilityModifier">
             <property name="packageAllowed" value="false"/>
-            <property name="protectedAllowed" value="false"/>
+            <property name="protectedAllowed" value="true"/>
             <property name="publicMemberPattern" value="^serialVersionUID$"/>
         </module>
 

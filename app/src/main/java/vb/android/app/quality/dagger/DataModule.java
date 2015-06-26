@@ -8,11 +8,15 @@ import retrofit.RestAdapter;
 import vb.android.app.quality.rest.APIInterface;
 
 /**
- * Created by Brize on 14/06/2015.
+ * Module which expose data providers implementation used by the app.
  */
 @Module
 public final class DataModule {
 
+    /**
+     * Return the REST API implementation used by this app.
+     * @return the REST API implementation used by this app.
+     */
     @Provides
     @Singleton
     public APIInterface provideApi() {
