@@ -1,6 +1,8 @@
 package com.vincentbrison.app.quality;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.robotium.solo.Condition;
@@ -15,11 +17,11 @@ import vb.android.app.quality.R;
 /**
  * Class to test instrumentation testing with the help of robotium.
  */
-public class MyRoboTest extends ActivityInstrumentationTestCase2 {
+public class ARobotiumTest extends ActivityInstrumentationTestCase2 {
 
     private Solo solo;
 
-    public MyRoboTest() {
+    public ARobotiumTest() {
         super(MainActivity.class);
     }
 
@@ -35,19 +37,20 @@ public class MyRoboTest extends ActivityInstrumentationTestCase2 {
         super.tearDown();
     }
 
-    public void testUI() {
+    public void testThatPIComputationEnableRanking() {
         solo.waitForActivity(MainActivity.class);
-        PiGenerator pi = Mockito.mock(PiGenerator.class);
-        Mockito.when(pi.calcPiDigits(5)).thenReturn(3.1415);
-/*
-        final TextView tv = (TextView) solo.getView(R.id.textView);
+
+        final EditText editText = (EditText) solo.getView(R.id.editTextDigits);
+        final Button buttonSendPI = (Button) solo.getView(R.id.buttonSendPi);
+        solo.enterText(editText, "5");
+        solo.clickOnView(solo.getView(R.id.buttonCompute));
         solo.waitForCondition(new Condition() {
             @Override
             public boolean isSatisfied() {
-                return tv.isShown();
+                return buttonSendPI.isEnabled();
             }
         }, 5000);
 
-        //assertTrue("TextView should have been set to the flavor name.", tv.getText().toString().equals(Constants.FLAVOR));*/
+        assertTrue("After a Pi computation, user is able to send its result", buttonSendPI.isEnabled());
     }
 }

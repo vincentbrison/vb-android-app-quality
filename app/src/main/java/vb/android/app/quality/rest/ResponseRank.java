@@ -10,4 +10,8 @@ public class ResponseRank {
     public int getRank() {
         return mRank;
     }
+
+    public void setRank(int rank) {
+        mRank = rank;
+    }
 }
