@@ -16,11 +16,15 @@
 
 package vb.android.app.quality.rest;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Vincent Brison on 14/06/2015.
  * Describe the result of ranking.
  */
 public class ResponseRank {
+
+    @SerializedName("rank")
     private int mRank;
 
     public int getRank() {

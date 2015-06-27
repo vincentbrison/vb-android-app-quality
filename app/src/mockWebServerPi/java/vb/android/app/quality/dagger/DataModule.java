@@ -43,7 +43,7 @@ public final class DataModule {
     @Singleton
     public APIInterface provideApi(Context context) {
         return new RestAdapter.Builder()
-                .setEndpoint(context.getString(R.string.url))
+                .setEndpoint(context.getString(R.string.url) + ':' + context.getString(R.string.port))
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build()
                 .create(APIInterface.class);

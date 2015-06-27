@@ -176,7 +176,7 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
 
     @Override
     public void onError(Throwable e) {
-        Toast.makeText(this, "Network error", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.network_issue), Toast.LENGTH_SHORT).show();
         setState(State.IS_PI_COMPUTED);
     }
 
