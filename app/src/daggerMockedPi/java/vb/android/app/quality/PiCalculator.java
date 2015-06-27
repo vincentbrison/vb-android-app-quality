@@ -5,7 +5,7 @@ import vb.android.app.quality.pi.PiGenerator;
 /**
  * Very slow class to compute PI.
  */
-public final class Pi implements PiGenerator {
+public final class PiCalculator implements PiGenerator {
 
     @Override
     public double calcPiDigits(int maxDigits) {

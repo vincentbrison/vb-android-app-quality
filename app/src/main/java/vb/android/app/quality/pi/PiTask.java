@@ -20,7 +20,7 @@ import android.os.AsyncTask;
 
 import java.lang.ref.WeakReference;
 
-import vb.android.app.quality.Pi;
+import vb.android.app.quality.PiCalculator;
 
 /**
  * AsyncTask to compute PI.
@@ -42,7 +42,7 @@ public class PiTask extends AsyncTask<Void, Void, Double> {
 
     @Override
     protected Double doInBackground(Void... params) {
-        return new Pi().calcPiDigits(mMax);
+        return new PiCalculator().calcPiDigits(mMax);
     }
 
     @Override

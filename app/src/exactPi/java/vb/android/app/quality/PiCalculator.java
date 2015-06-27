@@ -7,7 +7,7 @@ import vb.android.app.quality.pi.PiGenerator;
 /**
  * Very slow class to compute PI.
  */
-public final class Pi implements PiGenerator {
+public final class PiCalculator implements PiGenerator {
     private static final BigInteger TWO = BigInteger.valueOf(2);
     private static final BigInteger THREE = BigInteger.valueOf(3);
     private static final BigInteger FOUR = BigInteger.valueOf(4);
@@ -30,9 +30,8 @@ public final class Pi implements PiGenerator {
         while (digits < maxDigits) {
             if (FOUR.multiply(q).add(r).subtract(t).compareTo(n.multiply(t)) == -1) {
                 pi += n.doubleValue() / divider.doubleValue();
-                divider = divider.multiply(new BigInteger("10"));
+                divider = divider.multiply(BigInteger.TEN);
                 if (first) {
-                    System.out.print(".");
                     first = false;
                 }
                 nr = BigInteger.TEN.multiply(r.subtract(n.multiply(t)));

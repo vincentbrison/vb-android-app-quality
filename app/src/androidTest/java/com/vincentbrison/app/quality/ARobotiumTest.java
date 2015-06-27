@@ -3,16 +3,12 @@ package com.vincentbrison.app.quality;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.robotium.solo.Condition;
 import com.robotium.solo.Solo;
 
-import org.mockito.Mockito;
-
-import vb.android.app.quality.ui.MainActivity;
-import vb.android.app.quality.pi.PiGenerator;
 import vb.android.app.quality.R;
+import vb.android.app.quality.ui.MainActivity;
 
 /**
  * Class to test instrumentation testing with the help of robotium.
