@@ -1,6 +1,8 @@
 package vb.android.app.quality;
 
+import vb.android.app.quality.app.QualityApplication;
 import vb.android.app.quality.dagger.AppComponent;
+import vb.android.app.quality.dagger.AppModule;
 import vb.android.app.quality.dagger.DaggerAppComponent;
 
 /**
@@ -15,9 +17,10 @@ public final class InjectorHelper {
 
     /**
      * Init the dagger graph.
+     * @param application is the conttext of the application.
      */
-    public static void initializeApplicationComponent() {
-        sApplicationComponent = DaggerAppComponent.create();
+    public static void initializeApplicationComponent(QualityApplication application) {
+        sApplicationComponent = DaggerAppComponent.builder().appModule(new AppModule(application)).build();
 
     }
 

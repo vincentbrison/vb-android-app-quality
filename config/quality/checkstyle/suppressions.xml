@@ -9,7 +9,7 @@
     <suppress checks="[a-zA-Z0-9]*" files="BuildConfig.java" />
     <suppress checks="[a-zA-Z0-9]*" files="Test" />
     <suppress checks="[a-zA-Z0-9]*" files="Dagger*" />
-    <suppress checks="[a-zA-Z0-9]*" files=".*_ProvideApiFactory.java" />
+    <suppress checks="[a-zA-Z0-9]*" files=".*_.*Factory.java" />
     <suppress checks="[a-zA-Z0-9]*" files=".*ViewInjector.java" />
     <suppress checks="[a-zA-Z0-9]*" files=".*_MembersInjector.java" />
 
