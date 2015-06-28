@@ -1,32 +1,19 @@
 package com.vincentbrison.app.quality.robotium;
 
 import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
-import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.robotium.solo.Condition;
 import com.robotium.solo.Solo;
-import com.squareup.okhttp.mockwebserver.MockResponse;
-import com.squareup.okhttp.mockwebserver.MockWebServer;
 import com.vincentbrison.app.quality.AbstractTestMainActivity;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import java.io.IOException;
-
-import vb.android.app.quality.AssetsHelper;
 import vb.android.app.quality.R;
 import vb.android.app.quality.ui.MainActivity;
 
 /**
  * Class to test instrumentation testing with the help of robotium.
  */
-@RunWith(AndroidJUnit4.class)
 public class TestMainActivityWithRobotium extends AbstractTestMainActivity {
 
     protected Solo mSolo;
@@ -38,7 +25,7 @@ public class TestMainActivityWithRobotium extends AbstractTestMainActivity {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        mSolo = new Solo(getInstrumentation(), getActivity());
+        mSolo = new Solo(InstrumentationRegistry.getInstrumentation(), mActivityRule.getActivity());
         mEditText = (EditText) mSolo.getView(R.id.editTextDigits);
         mButtonSendPI = (Button) mSolo.getView(R.id.buttonSendPi);
         mButtonCompute = (Button) mSolo.getView(R.id.buttonCompute);
@@ -55,12 +42,6 @@ public class TestMainActivityWithRobotium extends AbstractTestMainActivity {
     protected void userAskPIComputation() {
         mSolo.enterText(mEditText, "5");
         mSolo.clickOnView(mButtonCompute);
-        mSolo.waitForCondition(new Condition() {
-            @Override
-            public boolean isSatisfied() {
-                return mButtonSendPI.isEnabled();
-            }
-        }, 5000);
     }
 
     @Override
@@ -103,34 +84,19 @@ public class TestMainActivityWithRobotium extends AbstractTestMainActivity {
 
     @Override
     protected boolean checkShareWentOK() {
-        // Very random way to check, may fail often.
-        mSolo.waitForText("Share");
-        return mSolo.searchText("Share");
+        // Cannot check that intent is deliver since its go outside of the application.
+        return false;
     }
 
     @Override
-    public void testThatDefaultBehaviorIsWorking() {
-        mMockWebServer.enqueue(new MockResponse().setBody(AssetsHelper.getStringFromAsset("stubs/rank_ok.json")));
-        try {
-            mMockWebServer.start(Integer.parseInt(getActivity().getString(R.string.port)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void testThatDefaultBehaviorIsWorking() throws Exception {
         mSolo.waitForActivity(MainActivity.class);
-
         super.testThatDefaultBehaviorIsWorking();
     }
 
     @Override
     public void testThatServerIssueDisplayToast() {
-        mMockWebServer.enqueue(new MockResponse().setResponseCode(500));
-        try {
-            mMockWebServer.start(Integer.parseInt(getActivity().getString(R.string.port)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         mSolo.waitForActivity(MainActivity.class);
-
         super.testThatServerIssueDisplayToast();
     }
 }

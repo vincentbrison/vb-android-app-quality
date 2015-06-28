@@ -16,62 +16,70 @@
 
 package com.vincentbrison.app.quality;
 
-import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.test.ActivityInstrumentationTestCase2;
-import android.widget.Button;
-import android.widget.EditText;
 
-import com.robotium.solo.Condition;
-import com.robotium.solo.Solo;
+import com.squareup.okhttp.mockwebserver.MockResponse;
 import com.squareup.okhttp.mockwebserver.MockWebServer;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.IOException;
+
+import vb.android.app.quality.AssetsHelper;
 import vb.android.app.quality.R;
 import vb.android.app.quality.ui.MainActivity;
+
+import static junit.framework.Assert.assertTrue;
 
 /**
  * Test class which describe functional tests for the main activity.
  */
 @RunWith(AndroidJUnit4.class)
-public abstract class AbstractTestMainActivity extends ActivityInstrumentationTestCase2 {
+public abstract class AbstractTestMainActivity {
 
     protected MockWebServer mMockWebServer;
 
-    public AbstractTestMainActivity() {
-        super(MainActivity.class);
-    }
-
     protected abstract void userAskPIComputation();
+
     protected abstract void userAskSendPIOnlineForRank();
+
     protected abstract void userAskShare();
 
     protected abstract boolean checkPIComputationWentOK();
+
     protected abstract boolean checkSendPIWentOK();
+
     protected abstract boolean checkSendPIWentWrong();
+
     protected abstract boolean checkShareWentOK();
 
+    @Rule
+    public IntentsTestRule<MainActivity> mActivityRule = new IntentsTestRule<>(
+            MainActivity.class);
+
     @Before
-    @Override
     public void setUp() throws Exception {
-        super.setUp();
-        injectInstrumentation(InstrumentationRegistry.getInstrumentation());
         mMockWebServer = new MockWebServer();
+        try {
+            mMockWebServer.start(Integer.parseInt(mActivityRule.getActivity().getString(R.string.port)));
+        } catch (IOException e) {
+            throw e;
+        }
     }
 
     @After
-    @Override
     public void tearDown() throws Exception {
         mMockWebServer.shutdown();
-        super.tearDown();
     }
 
     @Test
-    public void testThatDefaultBehaviorIsWorking() {
+    public void testThatDefaultBehaviorIsWorking() throws Exception {
+        mMockWebServer.enqueue(new MockResponse().setBody(AssetsHelper.getStringFromAsset("stubs/rank_ok.json")));
         userAskPIComputation();
         assertTrue("After a Pi computation, user is able to send its result.", checkPIComputationWentOK());
         userAskSendPIOnlineForRank();
@@ -82,6 +90,7 @@ public abstract class AbstractTestMainActivity extends ActivityInstrumentationTe
 
     @Test
     public void testThatServerIssueDisplayToast() {
+        mMockWebServer.enqueue(new MockResponse().setResponseCode(500));
         userAskPIComputation();
         assertTrue("After a Pi computation, user is able to send its result.", checkPIComputationWentOK());
         userAskSendPIOnlineForRank();

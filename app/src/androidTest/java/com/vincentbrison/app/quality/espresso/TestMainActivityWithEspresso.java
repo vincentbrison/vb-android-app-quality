@@ -16,53 +16,84 @@
 
 package com.vincentbrison.app.quality.espresso;
 
-import android.support.test.runner.AndroidJUnit4;
-import android.test.ActivityInstrumentationTestCase2;
+import android.app.Instrumentation;
+import android.content.Intent;
+import android.support.test.espresso.intent.Intents;
+import android.support.test.espresso.intent.matcher.IntentMatchers;
 
 import com.vincentbrison.app.quality.AbstractTestMainActivity;
 
-import org.junit.runner.RunWith;
+import vb.android.app.quality.R;
 
-import vb.android.app.quality.ui.MainActivity;
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.typeText;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.intent.Intents.intended;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasAction;
+import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.core.AllOf.allOf;
 
 /**
  * Class to test instrumentation testing with the help of Espresso.
  */
-@RunWith(AndroidJUnit4.class)
 public class TestMainActivityWithEspresso extends AbstractTestMainActivity {
 
     @Override
     protected void userAskPIComputation() {
-
+        onView(withId(R.id.editTextDigits)).perform(typeText("5"));
+        onView(withId(R.id.buttonCompute)).perform(click());
     }
 
     @Override
     protected void userAskSendPIOnlineForRank() {
-
+        onView(withId(R.id.buttonSendPi)).perform(click());
     }
 
     @Override
     protected void userAskShare() {
-
+        onView(withId(R.id.buttonShareResult)).perform(click());
     }
 
     @Override
     protected boolean checkPIComputationWentOK() {
-        return false;
+        onView(withId(R.id.buttonSendPi)).check(matches(isEnabled()));
+        return true;
     }
 
     @Override
     protected boolean checkSendPIWentOK() {
-        return false;
+        onView(withId(R.id.buttonShareResult)).check(matches(isEnabled()));
+        return true;
     }
 
     @Override
     protected boolean checkSendPIWentWrong() {
-        return false;
+        onView(withText(R.string.network_issue)).inRoot(withDecorView(
+                not((mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        return true;
     }
 
     @Override
     protected boolean checkShareWentOK() {
-        return false;
+        intended(allOf(
+                hasAction(Intent.ACTION_SEND),
+                IntentMatchers.hasExtra(Intent.EXTRA_SUBJECT, mActivityRule.getActivity().getString(R.string.share_title))));
+        return true;
+    }
+
+    @Override
+    public void testThatDefaultBehaviorIsWorking() throws Exception {
+        Instrumentation.ActivityResult dummyResult = new Instrumentation.ActivityResult(0, null);
+        Intents.intending(allOf(
+                hasAction(Intent.ACTION_SEND),
+                IntentMatchers.hasExtra(Intent.EXTRA_SUBJECT, mActivityRule.getActivity().getString(R.string.share_title))))
+                .respondWith(dummyResult);
+        super.testThatDefaultBehaviorIsWorking();
     }
 }

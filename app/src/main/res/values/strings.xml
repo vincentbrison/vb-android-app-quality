@@ -16,7 +16,7 @@
   -->
 
 <resources>
-
+    <string name="share_title">My rank on Pi computing bench</string>
     <string name="app_name">vb-android-app-quality</string>
     <string name="desc_pi">Enter the number of digits of Pi to compute : </string>
     <string name="compute">Compute</string>

@@ -122,7 +122,7 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
                 if (mState.equals(State.IS_RANK_READY)) {
                     Intent intentShare = new Intent(Intent.ACTION_SEND);
                     intentShare.setType("text/plain");
-                    intentShare.putExtra(Intent.EXTRA_SUBJECT, "My rank on Pi computing bench");
+                    intentShare.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_title));
                     intentShare.putExtra(
                             Intent.EXTRA_TEXT, "My rank is " + mResponseRank.getRank() + " on Pi computing bench.");
                     startActivity(intentShare);
