@@ -39,29 +39,15 @@ By default, all the reports will be generated in the folder app/build/reports.
 
 Flavor
 ------
-The project itself is a demo of the flavor system. Flavor are defined in the [build.gradle](app/build.gradle).
+The project itself show various uses of the flavor system. Flavors are defined in the [build.gradle](app/build.gradle).
 You need to provide a least a name to the flavor : 
 
- ```groovy
- productFlavors {
-        red {
-            packageName 'vb.android.app.quality.red'
-        }
-        blue {
-            packageName 'vb.android.app.quality.blue'
-        }
-    }
- ```
 You can define several properties to your flavors. One very useful is the `packageName` which let you
 change the package name of your application. This can be used to generate differents flavors of 
 your application and install both of them on the same device (free and paid versions, dev, validation and release versions...).
 
 You can also put specific sources and resources with flavors. As it is in this project, just create
 a directory under the src folder, name it with the name of your flavor, and put inside java codes and resources.
-
-AAR
----
-Work in progress...
 
 Testing
 -------
@@ -78,7 +64,7 @@ This project is based on these two other projects, which are awesome. Consider t
 License
 =======
 
-    Copyright 2013 Vincent Brison.
+    Copyright 2015 Vincent Brison.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
