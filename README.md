@@ -1,8 +1,6 @@
 vb-android-app-quality
 ======================
 
-[![Build Status](https://travis-ci.org/vincentbrison/vb-android-app-quality.svg?branch=master)](https://travis-ci.org/vincentbrison/vb-android-app-quality)
-
 Sample android project using Gradle, with basic quality tools set up. 
 
 This project for provide a clean base to any Gradle Android project.
