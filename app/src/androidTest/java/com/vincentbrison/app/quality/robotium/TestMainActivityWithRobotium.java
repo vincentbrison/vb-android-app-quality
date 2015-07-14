@@ -101,7 +101,7 @@ public class TestMainActivityWithRobotium extends AbstractTestMainActivity {
     @Override
     protected boolean checkShareWentOK() {
         // Cannot check that intent is deliver since its go outside of the application.
-        return false;
+        throw new IllegalStateException("Can not test such a thing :/");
     }
 
     @Override
