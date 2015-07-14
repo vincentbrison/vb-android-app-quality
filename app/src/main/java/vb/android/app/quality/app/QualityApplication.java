@@ -17,7 +17,9 @@
 package vb.android.app.quality.app;
 
 import android.app.Application;
+import android.os.StrictMode;
 
+import vb.android.app.quality.BuildConfig;
 import vb.android.app.quality.InjectorHelper;
 
 /**
@@ -29,5 +31,17 @@ public class QualityApplication extends Application {
     public void onCreate() {
         super.onCreate();
         InjectorHelper.initializeApplicationComponent(this);
+
+        if (BuildConfig.DEBUG) {
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                    .detectAll()
+                    .penaltyLog()
+                    .build());
+            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                    .detectAll()
+                    .penaltyLog()
+                    .penaltyDeath()
+                    .build());
+        }
     }
 }
