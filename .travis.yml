@@ -19,12 +19,12 @@ android:
 
     # Specify at least one system image,
     # if you need to run emulator(s) during your tests
-    - sys-img-armeabi-v7a-android-20
+    - sys-img-armeabi-v7a-android-19
 
 before_script:
   # Create and start emulator
   - android list targets
-  - echo no | android create avd --force -n test -t android-20 --abi armeabi-v7a
+  - echo no | android create avd --force -n test -t android-19 --abi armeabi-v7a
   - emulator -avd test -no-skin -no-audio -no-window &
   # Be sure emulator is launched (wait-for-device may not be suficiant)
   - adb wait-for-device && sleep 240
