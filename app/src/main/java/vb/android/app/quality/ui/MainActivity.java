@@ -17,10 +17,13 @@
 package vb.android.app.quality.ui;
 
 import android.app.Activity;
+import android.app.KeyguardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -32,6 +35,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
+import vb.android.app.quality.BuildConfig;
 import vb.android.app.quality.InjectorHelper;
 import vb.android.app.quality.R;
 import vb.android.app.quality.pi.PiTask;
@@ -85,6 +89,18 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (BuildConfig.DEBUG) {
+            try {
+                KeyguardManager mKeyGuardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+                KeyguardManager.KeyguardLock mLock = mKeyGuardManager.newKeyguardLock("");
+                mLock.disableKeyguard();
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);

@@ -19,17 +19,17 @@ android:
 
     # Specify at least one system image,
     # if you need to run emulator(s) during your tests
-    - sys-img-armeabi-v7a-android-22
+    - sys-img-armeabi-v7a-android-21
 
 before_script:
   # Create and start emulator
+  - android list targets
   - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
   - emulator -avd test -no-skin -no-audio -no-window &
-  # Be sure emulator is launched (wait-for-device may not be suficiant)
-  - adb wait-for-device && sleep 300
+  - android-wait-for-emulator
   - adb shell input keyevent 82 &
 
 script:
-  - ./gradlew app:check -Ptravis --stacktrace
-  - ./gradlew app:test -Ptravis --stacktrace
-  - ./gradlew app:connectedAndroidTestMockWebServerPiDebug -Ptravis --stacktrace
+  - ./gradlew app:check --stacktrace
+  - ./gradlew app:test --stacktrace
+  - ./gradlew app:connectedAndroidTestMockWebServerPiDebug --info --stacktrace
