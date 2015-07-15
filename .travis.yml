@@ -26,11 +26,10 @@ before_script:
   - android list targets
   - echo no | android create avd --force -n test -t android-19 --abi armeabi-v7a
   - emulator -avd test -no-skin -no-audio -no-window &
-  # Be sure emulator is launched (wait-for-device may not be suficiant)
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
 
 script:
   - ./gradlew app:check -Ptravis --stacktrace
   - ./gradlew app:test -Ptravis --stacktrace
-  - ./gradlew app:connectedAndroidTestMockWebServerPiDebug -Ptravis --stacktrace
+  - ./gradlew app:connectedAndroidTestMockWebServerPiDebug --stacktrace
