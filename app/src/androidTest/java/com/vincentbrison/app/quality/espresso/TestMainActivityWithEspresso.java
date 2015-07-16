@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.espresso.intent.matcher.IntentMatchers;
 
-import com.squareup.spoon.Spoon;
 import com.vincentbrison.app.quality.AbstractTestMainActivity;
 
 import vb.android.app.quality.R;
@@ -64,14 +63,12 @@ public class TestMainActivityWithEspresso extends AbstractTestMainActivity {
     @Override
     protected boolean checkPIComputationWentOK() {
         onView(withId(R.id.buttonSendPi)).check(matches(isEnabled()));
-        Spoon.screenshot(mActivityRule.getActivity(), "checkPIComputationWentOK");
         return true;
     }
 
     @Override
     protected boolean checkSendPIWentOK() {
         onView(withId(R.id.buttonShareResult)).check(matches(isEnabled()));
-        Spoon.screenshot(mActivityRule.getActivity(), "checkSendPIWentOK");
         return true;
     }
 
@@ -79,7 +76,6 @@ public class TestMainActivityWithEspresso extends AbstractTestMainActivity {
     protected boolean checkSendPIWentWrong() {
         onView(withText(R.string.network_issue)).inRoot(withDecorView(
                 not((mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
-        Spoon.screenshot(mActivityRule.getActivity(), "checkSendPIWentWrong");
         return true;
     }
 
@@ -88,7 +84,6 @@ public class TestMainActivityWithEspresso extends AbstractTestMainActivity {
         intended(allOf(
                 hasAction(Intent.ACTION_SEND),
                 IntentMatchers.hasExtra(Intent.EXTRA_SUBJECT, mActivityRule.getActivity().getString(R.string.share_title))));
-        Spoon.screenshot(mActivityRule.getActivity(), "checkShareWentOK");
         return true;
     }
 

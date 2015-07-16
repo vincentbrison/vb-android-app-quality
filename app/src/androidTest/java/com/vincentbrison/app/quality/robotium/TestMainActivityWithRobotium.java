@@ -22,7 +22,6 @@ import android.widget.EditText;
 
 import com.robotium.solo.Condition;
 import com.robotium.solo.Solo;
-import com.squareup.spoon.Spoon;
 import com.vincentbrison.app.quality.AbstractTestMainActivity;
 
 import vb.android.app.quality.R;
@@ -79,7 +78,6 @@ public class TestMainActivityWithRobotium extends AbstractTestMainActivity {
                 return mButtonSendPI.isEnabled();
             }
         }, 5000);
-        Spoon.screenshot(mActivityRule.getActivity(), "checkPIComputationWentOK");
         return mButtonSendPI.isEnabled();
     }
 
@@ -91,14 +89,12 @@ public class TestMainActivityWithRobotium extends AbstractTestMainActivity {
                 return mButtonShare.isEnabled();
             }
         }, 5000);
-        Spoon.screenshot(mActivityRule.getActivity(), "checkSendPIWentOK");
         return mButtonShare.isEnabled();
     }
 
     @Override
     protected boolean checkSendPIWentWrong() {
         mSolo.waitForText(mSolo.getString(R.string.network_issue));
-        Spoon.screenshot(mActivityRule.getActivity(), "checkSendPIWentWrong");
         return mSolo.searchText(mSolo.getString(R.string.network_issue));
     }
 
@@ -106,7 +102,6 @@ public class TestMainActivityWithRobotium extends AbstractTestMainActivity {
     protected boolean checkShareWentOK() {
         // Cannot check that intent is deliver since its go outside of the application.
         // Return fake result true.
-        Spoon.screenshot(mActivityRule.getActivity(), "checkShareWentOK");
         return false;
     }
 

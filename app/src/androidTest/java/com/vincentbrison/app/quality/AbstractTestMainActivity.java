@@ -21,6 +21,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.squareup.okhttp.mockwebserver.MockResponse;
 import com.squareup.okhttp.mockwebserver.MockWebServer;
+import com.squareup.spoon.Spoon;
 
 import org.junit.After;
 import org.junit.Before;
@@ -82,10 +83,13 @@ public abstract class AbstractTestMainActivity {
         mMockWebServer.enqueue(new MockResponse().setBody(AssetsHelper.getStringFromAsset("stubs/rank_ok.json")));
         userAskPIComputation();
         assertTrue("After a Pi computation, user is able to send its result.", checkPIComputationWentOK());
+        Spoon.screenshot(mActivityRule.getActivity(), "checkPIComputationWentOK");
         userAskSendPIOnlineForRank();
         assertTrue("After ranking his result online, the user should be able to share his rank.", checkSendPIWentOK());
+        Spoon.screenshot(mActivityRule.getActivity(), "checkSendPIWentOK");
         userAskShare();
         assertTrue("After asking for share, the user should be able to choose how he wants to share", checkShareWentOK());
+        Spoon.screenshot(mActivityRule.getActivity(), "checkShareWentOK");
     }
 
     @Test
@@ -93,7 +97,9 @@ public abstract class AbstractTestMainActivity {
         mMockWebServer.enqueue(new MockResponse().setResponseCode(500));
         userAskPIComputation();
         assertTrue("After a Pi computation, user is able to send its result.", checkPIComputationWentOK());
+        Spoon.screenshot(mActivityRule.getActivity(), "checkPIComputationWentOK");
         userAskSendPIOnlineForRank();
         assertTrue("A Toast message should be displayed.", checkSendPIWentWrong());
+        Spoon.screenshot(mActivityRule.getActivity(), "checkSendPIWentWrong");
     }
 }
