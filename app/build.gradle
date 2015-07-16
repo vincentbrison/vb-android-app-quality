@@ -17,7 +17,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply from: '../config/quality.gradle'
-
+apply plugin: 'spoon'
 
 android {
     compileSdkVersion 21
@@ -95,4 +95,5 @@ dependencies {
     androidTestCompile 'com.google.dexmaker:dexmaker:1.0' // required by Mockito
     androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.0' // required by Mockito
     androidTestCompile 'org.mockito:mockito-core:1.9.5' // for creating mocks
+    androidTestCompile 'com.squareup.spoon:spoon-client:1.1.10'
 }
