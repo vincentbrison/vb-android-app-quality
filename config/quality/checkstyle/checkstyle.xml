@@ -213,7 +213,7 @@
         <!-- Checks for member variable name naming conventions. !-->
         <!-- See http://checkstyle.sf.net/config_naming.html !-->
         <module name="MemberName">
-            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+            <property name="format" value="^m[A-Z][a-zA-Z0-9]*$"/>
             <property name="applyToPublic" value="true"/>
             <property name="applyToProtected" value="true"/>
             <property name="applyToPackage" value="true"/>
