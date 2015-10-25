@@ -83,6 +83,9 @@ dependencies {
     apt 'com.google.dagger:dagger-compiler:2.0.1'
     provided 'org.glassfish:javax.annotation:10.0-b28'
 
+    testCompile 'org.robolectric:robolectric:3.0'
+    testCompile 'com.squareup.okhttp:mockwebserver:2.4.0' // For creating a mockable web server.
+
     testCompile 'junit:junit:4.12'
 
     androidTestCompile 'com.android.support.test:runner:0.3'
