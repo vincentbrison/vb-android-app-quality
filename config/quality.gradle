@@ -18,7 +18,7 @@ apply plugin: 'pmd'
  * limitations under the License.
  */
 
-// Add checkstyle, findbugs, pmd and lint to the check task.
+// Add checkstyle, findbugs, pmd, and lint to the check task.
 check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'
 
 task checkstyle(type: Checkstyle) {
@@ -74,6 +74,29 @@ task pmd(type: Pmd) {
             destination "$project.buildDir/reports/pmd/pmd.html"
         }
     }
+}
+
+task detectInfer(type: Exec) {
+    commandLine 'command'
+    args = ['-v', 'infer']
+
+    // Hide output if infer is present
+    standardOutput new ByteArrayOutputStream()
+
+    // Inform user if infer not present
+    ignoreExitValue true
+    doLast {
+        if(execResult.getExitValue() != 0) {
+            throw new GradleException("Infer seems not installed. Please refer to http://fbinfer.com/docs/getting-started.html")
+        }
+    }
+
+}
+
+task infer(type: Exec, dependsOn: [clean, detectInfer]) {
+    workingDir "${project.rootDir}"
+    commandLine 'infer'
+    args = ['--', './gradlew', 'build']
 }
 
 android {
