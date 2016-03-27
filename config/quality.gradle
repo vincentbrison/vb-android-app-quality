@@ -90,7 +90,6 @@ task detectInfer(type: Exec) {
             throw new GradleException("Infer seems not installed. Please refer to http://fbinfer.com/docs/getting-started.html")
         }
     }
-
 }
 
 task infer(type: Exec, dependsOn: [clean, detectInfer]) {
