@@ -22,7 +22,6 @@ import junit.framework.TestCase;
  * Created by Vincent Brison on 14/06/2015.
  */
 public class PiTest extends TestCase {
-
     public void testCalcPiDigits() throws Exception {
         if (Contants.FLAVOR.equals(Flavors.APPROXIMATION_PI)) {
             double pi = new PiCalculator().calcPiDigits(500);
@@ -33,6 +32,5 @@ public class PiTest extends TestCase {
             double pi = new PiCalculator().calcPiDigits(5);
             assertTrue("The 5 first decimals of computed Pi (" + pi + ") should be correct.", pi == 3.1415);
         }
-
     }
 }

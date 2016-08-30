@@ -14,7 +14,8 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,48 +26,46 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="vb.android.app.quality.ui.MainActivity">
 
-
     <TextView
         android:id="@+id/textViewName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/flavor"
         android:text="@string/desc_pi"
+        android:textColor="@color/flavor"
         android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
     <EditText
-        android:inputType="number"
         android:id="@+id/editTextDigits"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:inputType="number"/>
 
     <Button
-        android:text="@string/compute"
         android:id="@+id/buttonCompute"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/compute"/>
 
     <TextView
         android:id="@+id/textViewValue"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 
     <Button
-        android:text="@string/rank"
         android:id="@+id/buttonSendPi"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/rank"/>
 
     <TextView
         android:id="@+id/textviewRank"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 
     <Button
-        android:text="@string/share"
         android:id="@+id/buttonShareResult"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content"
+        android:text="@string/share"/>
 </LinearLayout>

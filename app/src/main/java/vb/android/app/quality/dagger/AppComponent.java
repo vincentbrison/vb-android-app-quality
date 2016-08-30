@@ -41,6 +41,7 @@ public interface AppComponent {
 
     /**
      * Return the application context.
+     *
      * @return the application context.
      */
     Context context();

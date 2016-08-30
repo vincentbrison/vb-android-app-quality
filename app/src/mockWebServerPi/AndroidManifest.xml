@@ -15,9 +15,9 @@
   ~ limitations under the License.
   -->
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="vb.android.app.quality" >
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="vb.android.app.quality">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
 </manifest>
