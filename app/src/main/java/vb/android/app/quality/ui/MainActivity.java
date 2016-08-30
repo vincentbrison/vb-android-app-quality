@@ -28,8 +28,8 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import vb.android.app.quality.InjectorHelper;
@@ -53,25 +53,25 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
 
     protected State mState = State.IDLE;
 
-    @InjectView(R.id.textViewName)
+    @BindView(R.id.textViewName)
     protected TextView mTextViewName;
 
-    @InjectView(R.id.textViewValue)
+    @BindView(R.id.textViewValue)
     protected TextView mTextViewValue;
 
-    @InjectView(R.id.buttonCompute)
+    @BindView(R.id.buttonCompute)
     protected Button mButtonCompute;
 
-    @InjectView(R.id.editTextDigits)
+    @BindView(R.id.editTextDigits)
     protected EditText mEditTextDigits;
 
-    @InjectView(R.id.buttonSendPi)
+    @BindView(R.id.buttonSendPi)
     protected Button mButtonSendPi;
 
-    @InjectView(R.id.buttonShareResult)
+    @BindView(R.id.buttonShareResult)
     protected Button mButtonShare;
 
-    @InjectView(R.id.textviewRank)
+    @BindView(R.id.textviewRank)
     protected TextView mTextViewRank;
 
     @Inject
@@ -88,7 +88,7 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
 
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         InjectorHelper.getApplicationComponent().inject(this);
         mButtonSendPi.setEnabled(false);
         mButtonShare.setEnabled(false);
