@@ -4,7 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import retrofit.http.Path;
+import retrofit2.http.Path;
 import rx.Observable;
 import vb.android.app.quality.rest.APIInterface;
 import vb.android.app.quality.rest.ResponseRank;
@@ -14,9 +14,9 @@ import vb.android.app.quality.rest.ResponseRank;
  */
 @Module
 public final class DataModule {
-
     /**
      * Return the REST API implementation used by this app.
+     *
      * @return the REST API implementation used by this app.
      */
     @Provides
@@ -26,7 +26,6 @@ public final class DataModule {
     }
 
     private static class MockAPIInterface implements APIInterface {
-
         @Override
         public Observable<ResponseRank> getRank(
                 @Path("algo") String algo, @Path("time") double time, @Path("max") double max) {

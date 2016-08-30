@@ -19,8 +19,6 @@ package com.vincentbrison.app.quality;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.squareup.okhttp.mockwebserver.MockResponse;
-import com.squareup.okhttp.mockwebserver.MockWebServer;
 import com.squareup.spoon.Spoon;
 
 import org.junit.After;
@@ -31,6 +29,8 @@ import org.junit.runner.RunWith;
 
 import java.io.IOException;
 
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
 import vb.android.app.quality.AssetsHelper;
 import vb.android.app.quality.R;
 import vb.android.app.quality.ui.MainActivity;

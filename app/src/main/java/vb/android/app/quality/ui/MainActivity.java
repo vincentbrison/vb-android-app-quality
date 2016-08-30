@@ -32,6 +32,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import vb.android.app.quality.InjectorHelper;
 import vb.android.app.quality.R;
 import vb.android.app.quality.pi.PiTask;
@@ -112,7 +113,9 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
                 if (!mState.equals(State.IS_COMPUTING) || mState.equals(State.IS_SENDING)) {
                     setState(State.IS_SENDING);
                     mApi.getRank(getString(R.string.algo), mTime, mMax)
-                            .observeOn(AndroidSchedulers.mainThread()).subscribe(MainActivity.this);
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(MainActivity.this);
                 }
             }
         });

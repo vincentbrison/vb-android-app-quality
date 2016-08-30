@@ -20,7 +20,11 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import retrofit.RestAdapter;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import vb.android.app.quality.rest.APIInterface;
 
 /**
@@ -28,18 +32,34 @@ import vb.android.app.quality.rest.APIInterface;
  */
 @Module
 public final class DataModule {
+    /**
+     * Return the OkHttpClient implementation used by this app.
+     *
+     * @return the OkHttpClient implementation used by this app.
+     */
+    @Provides
+    @Singleton
+    public OkHttpClient provideOkHttpClient() {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        return new OkHttpClient.Builder().addInterceptor(interceptor).build();
+    }
 
     /**
      * Return the REST API implementation used by this app.
+     *
+     * @param client the OkHttpClient to use.
      * @return the REST API implementation used by this app.
      */
     @Provides
     @Singleton
-    public APIInterface provideApi() {
-            return new RestAdapter.Builder()
-                    .setEndpoint("http://echo.jsontest.com")
-                    .setLogLevel(RestAdapter.LogLevel.FULL)
-                    .build()
-                    .create(APIInterface.class);
+    public APIInterface provideApi(OkHttpClient client) {
+        return new Retrofit.Builder()
+                .baseUrl("http://echo.jsontest.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .client(client)
+                .build()
+                .create(APIInterface.class);
     }
 }
