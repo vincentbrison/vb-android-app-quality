@@ -47,18 +47,22 @@ android {
     }
 
     productFlavors {
-        exactPi {
-            applicationId 'vb.android.app.quality.exactPi'
-        }
-
+        // PI is computed using a approximation.
         approximationPi {
             applicationId 'vb.android.app.quality.approximationPi'
         }
 
+        // PI is computed using a mocked algorithm. REST communication is mocked through Dagger.
         daggerMockedPi {
             applicationId 'vb.android.app.quality.daggerMockedPi'
         }
 
+        // PI is computed using an exact algorithm.
+        exactPi {
+            applicationId 'vb.android.app.quality.exactPi'
+        }
+
+        // PI is computed using a mocked algorithm. REST communication is mocked through MockWebServer.
         mockWebServerPi {
             applicationId 'vb.android.app.quality.mockWebServerPi'
         }
