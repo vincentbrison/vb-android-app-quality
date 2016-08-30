@@ -102,7 +102,7 @@ public class TestMainActivityWithRobotium extends AbstractTestMainActivity {
     protected boolean checkShareWentOK() {
         // Cannot check that intent is deliver since its go outside of the application.
         // Return fake result true.
-        return false;
+        return true;
     }
 
     @Override
