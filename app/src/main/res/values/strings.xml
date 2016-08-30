@@ -24,4 +24,5 @@
     <string name="share">Share the result</string>
     <string name="computing">Pi is computing</string>
     <string name="network_issue">Network issue</string>
+    <string name="your_rank_is">Your rank is %1$d</string>
 </resources>

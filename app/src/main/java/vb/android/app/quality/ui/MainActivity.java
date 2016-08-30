@@ -188,6 +188,6 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
     public void onNext(ResponseRank responseRank) {
         setState(State.IS_RANK_READY);
         mResponseRank = responseRank;
-        mTextViewRank.setText("Your rank is " + responseRank.getRank());
+        mTextViewRank.setText(getString(R.string.your_rank_is, responseRank.getRank()));
     }
 }
