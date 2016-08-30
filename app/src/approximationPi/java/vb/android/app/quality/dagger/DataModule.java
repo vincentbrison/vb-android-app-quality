@@ -12,7 +12,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import vb.android.app.quality.R;
-import vb.android.app.quality.rest.APIInterface;
+import vb.android.app.quality.rest.ApiInterface;
 
 /**
  * Module which expose data providers implementation used by the app.
@@ -43,13 +43,13 @@ public final class DataModule {
      */
     @Provides
     @Singleton
-    public APIInterface provideApi(Context context, OkHttpClient client) {
+    public ApiInterface provideApi(Context context, OkHttpClient client) {
         return new Retrofit.Builder()
                 .baseUrl(context.getString(R.string.url))
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(client)
                 .build()
-                .create(APIInterface.class);
+                .create(ApiInterface.class);
     }
 }

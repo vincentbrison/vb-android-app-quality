@@ -21,7 +21,7 @@ import android.content.Context;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import vb.android.app.quality.rest.APIInterface;
+import vb.android.app.quality.rest.ApiInterface;
 import vb.android.app.quality.ui.MainActivity;
 
 /**
@@ -37,7 +37,7 @@ public interface AppComponent {
      *
      * @return the REST API used by the app.
      */
-    APIInterface aPIInterface();
+    ApiInterface apiInterface();
 
     /**
      * Return the application context.

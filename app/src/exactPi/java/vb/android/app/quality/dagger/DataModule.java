@@ -25,7 +25,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import vb.android.app.quality.rest.APIInterface;
+import vb.android.app.quality.rest.ApiInterface;
 
 /**
  * Module which expose data providers implementation used by the app.
@@ -53,13 +53,13 @@ public final class DataModule {
      */
     @Provides
     @Singleton
-    public APIInterface provideApi(OkHttpClient client) {
+    public ApiInterface provideApi(OkHttpClient client) {
         return new Retrofit.Builder()
                 .baseUrl("http://echo.jsontest.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(client)
                 .build()
-                .create(APIInterface.class);
+                .create(ApiInterface.class);
     }
 }

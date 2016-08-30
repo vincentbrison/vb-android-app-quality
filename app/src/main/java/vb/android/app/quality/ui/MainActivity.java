@@ -36,7 +36,7 @@ import rx.schedulers.Schedulers;
 import vb.android.app.quality.InjectorHelper;
 import vb.android.app.quality.R;
 import vb.android.app.quality.pi.PiTask;
-import vb.android.app.quality.rest.APIInterface;
+import vb.android.app.quality.rest.ApiInterface;
 import vb.android.app.quality.rest.ResponseRank;
 
 /**
@@ -76,7 +76,7 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
     protected TextView mTextViewRank;
 
     @Inject
-    protected APIInterface mApi;
+    protected ApiInterface mApi;
 
     protected int mMax;
     protected long mStartTime;
