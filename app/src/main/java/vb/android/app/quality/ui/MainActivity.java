@@ -19,6 +19,7 @@ package vb.android.app.quality.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -97,12 +98,17 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
             @Override
             public void onClick(View v) {
                 if (!mState.equals(State.IS_COMPUTING) || mState.equals(State.IS_SENDING)) {
-                    setState(State.IS_COMPUTING);
-                    int digits = Integer.parseInt(mEditTextDigits.getText().toString());
-                    PiTask task = new PiTask(digits, MainActivity.this);
-                    mStartTime = System.currentTimeMillis();
-                    mMax = digits;
-                    task.execute();
+                    if (TextUtils.isEmpty(mEditTextDigits.getText().toString())) {
+                        Toast.makeText(MainActivity.this,
+                                R.string.enter_number_of_digits, Toast.LENGTH_SHORT).show();
+                    } else {
+                        setState(State.IS_COMPUTING);
+                        int digits = Integer.parseInt(mEditTextDigits.getText().toString());
+                        PiTask task = new PiTask(digits, MainActivity.this);
+                        mStartTime = System.currentTimeMillis();
+                        mMax = digits;
+                        task.execute();
+                    }
                 }
             }
         });
