@@ -1,48 +1,66 @@
-# vb-android-app-quality
+# vb-android-app-quality [![Build Status][1]][2]
 
-Sample android project using Gradle, with basic quality tools set up.
+Sample Android project using Gradle, with basic quality tools set up.
 
-This project for provide a clean base to any Gradle Android project.
+It can serve as a clean base for any Gradle Android project, and illustrates my articles about
+Gradle on my [website](http://vincentbrison.com).
 
-This project also illustrate my articles about Gradle on my [website](http://vincentbrison.com).
+The sample app computes Pi using various algorithms, and talks to a REST API.
+
+## Libraries
+
+The following libraries are used in the project:
+
+- ButterKnife
+- Dagger
+- Retrofit
+- RxAndroid
 
 ## Quality
 
-You will find under the directory /config the base configuration to run quality test on the project.
-The followings tools are used :
- - Checkstyle.
- - Findbugs.
- - PMD.
- - Lint.
+The base configuration to run quality test can be found in the `/config` directory.
+The followings tools are used:
 
-To run these quality tools and get reports, you need to execute the following gradle command :
+- Checkstyle
+- Findbugs
+- PMD
+- Lint
 
- ```bash
-  gradle check
-  ```
+To run these quality tools and get reports, you need to execute the following Gradle command:
 
-Findbugs needs the binaries of the project, so be sure to run at least one time the following command, before launching a check :
+```bash
+./gradlew check
+```
 
- ```bash
-   gradle build
- ```
+By default, reports will be generated in `app/build/reports`.
 
-You can modify the behaviour of each tool through the [quality.gradle](config/quality.gradle) file.
-You can for example set :
- - The output format (xml or html).
- - Abort the task when a failure is found.
+See [quality.gradle](config/quality.gradle) for configuration options of each tool.
+You can for example set:
 
-You should refer to this [gradle documentation](http://www.gradle.org/docs/current/userguide/userguide.html) to configure those plugins.
+- The output format (xml or html)
+- Abort the task when a failure is found
 
-By default, all the reports will be generated in the folder app/build/reports.
+Refer to the [Gradle documentation][3] to configure those plugins.
 
-## Flavor
+## Flavors
 
-The project itself show various uses of the flavor system. Flavors are defined in the [build.gradle](app/build.gradle).
-You need to provide a least a name to the flavor :
+The project itself show various uses of the flavor system. Flavors are defined in [build.gradle](app/build.gradle).
+The following four flavors are defined:
 
-You can define several properties to your flavors. One very useful is the `packageName` which let you
-change the package name of your application. This can be used to generate differents flavors of
+#### approximationPi
+PI is computed using a approximation.
+
+#### daggerMockedPi
+PI is computed using a mocked algorithm. REST communication is mocked through Dagger.
+
+#### exactPi
+PI is computed using an exact algorithm.
+
+#### mockWebServerPi
+PI is computed using a mocked algorithm. REST communication is mocked through MockWebServer.
+
+You can define several properties to your flavors. One very useful is `applicationId` which let you
+change the application ID of your application. This can be used to generate different flavors of
 your application and install both of them on the same device (free and paid versions, dev, validation and release versions...).
 
 You can also put specific sources and resources with flavors. As it is in this project, just create
@@ -52,11 +70,12 @@ a directory under the src folder, name it with the name of your flavor, and put 
 
 Work in progress...
 
-To go further
--------------
-This project is based on these two other projects, which are awesome. Consider take a look at them :
- - [Quality-Tools-for-Android](https://github.com/stephanenicolas/Quality-Tools-for-Android).
- - [volley-examples](https://github.com/marcoRS/volley-examples).
+## To go further
+
+This project is based on these two other projects, which are awesome. Consider take a look at them:
+
+ - [Quality-Tools-for-Android][4]
+ - [volley-examples][5]
 
 # License
 
@@ -73,3 +92,9 @@ This project is based on these two other projects, which are awesome. Consider t
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+
+[1]: https://travis-ci.org/vincentbrison/vb-android-app-quality.svg?branch=master
+[2]: https://travis-ci.org/vincentbrison/vb-android-app-quality
+[3]: http://www.gradle.org/docs/current/userguide/userguide.html
+[4]: https://github.com/stephanenicolas/Quality-Tools-for-Android
+[5]: https://github.com/marcoRS/volley-examples
