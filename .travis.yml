@@ -1,28 +1,32 @@
 language: android
+
+jdk:
+  - oraclejdk8
+
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
 android:
   components:
-    # Uncomment the lines below if you want to
-    # use the latest revision of Android SDK Tools
-    # - platform-tools
-    # - tools
-
-    # The BuildTools version used by your project
-    - build-tools-21.1.2
-
-    # The SDK version used to compile your project
-    - android-21
-
-    # Additional components
+    - tools
+    - build-tools-24.0.3
+    - android-24
+    - platform-tools
     - extra-google-m2repository
     - extra-android-m2repository
     - extra-android-support
 
     # Specify at least one system image,
     # if you need to run emulator(s) during your tests
-    - sys-img-armeabi-v7a-android-21
+    - sys-img-armeabi-v7a-android-24
 
 before_install:
-  - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
+  - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
   - emulator -avd test -no-skin -no-audio -no-window &
 
 before_script:
@@ -30,8 +34,7 @@ before_script:
   - adb shell input keyevent 82 &
 
 script:
-  - ./gradlew app:check
-  - ./gradlew app:test
+  - ./gradlew check
 
   # Disable for now, since Travis Android emulators are not reliable.
-  #- ./gradlew app:connectedAndroidTestMockWebServerPiDebug --stacktrace
+  #- ./gradlew connectedAndroidTestMockWebServerPiDebug --stacktrace
