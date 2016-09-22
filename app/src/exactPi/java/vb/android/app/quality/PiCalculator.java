@@ -21,7 +21,7 @@ import java.math.BigInteger;
 import vb.android.app.quality.pi.PiGenerator;
 
 /**
- * Very slow class to compute PI.
+ * Slow way to compute PI based on digits.
  */
 public final class PiCalculator implements PiGenerator {
     private static final BigInteger TWO = BigInteger.valueOf(2);
@@ -30,7 +30,12 @@ public final class PiCalculator implements PiGenerator {
     private static final BigInteger SEVEN = BigInteger.valueOf(7);
 
     @Override
-    public double calcPiDigits(int maxDigits) {
+    public CalculationMethod getCalculationMethod() {
+        return CalculationMethod.DIGITS;
+    }
+
+    @Override
+    public double calcPiDigits(int max) {
         BigInteger q = BigInteger.ONE;
         BigInteger r = BigInteger.ZERO;
         BigInteger t = BigInteger.ONE;
@@ -43,7 +48,7 @@ public final class PiCalculator implements PiGenerator {
         boolean first = true;
         int digits = 0;
         BigInteger divider = BigInteger.ONE;
-        while (digits < maxDigits) {
+        while (digits < max) {
             if (FOUR.multiply(q).add(r).subtract(t).compareTo(n.multiply(t)) == -1) {
                 pi += n.doubleValue() / divider.doubleValue();
                 divider = divider.multiply(BigInteger.TEN);

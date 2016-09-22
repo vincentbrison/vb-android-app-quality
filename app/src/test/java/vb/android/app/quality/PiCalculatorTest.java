@@ -18,21 +18,43 @@ package vb.android.app.quality;
 
 import junit.framework.TestCase;
 
+import java.util.Locale;
+
+import vb.android.app.quality.pi.PiGenerator;
+
 /**
  * Created by Vincent Brison on 14/06/2015.
  */
 public class PiCalculatorTest extends TestCase {
     public void testCalcPiDigits() throws Exception {
-        if ("approximationPi".equals(BuildConfig.FLAVOR)) {
-            double pi = new PiCalculator().calcPiDigits(500);
-            assertTrue("After 500 iterations, computed Pi (" +
-                    pi +
-                    ") should have at least 2 decimals rights.", pi <= 3.15 && pi >= 3.13);
+        PiCalculator calculator = new PiCalculator();
+        PiGenerator.CalculationMethod method = calculator.getCalculationMethod();
+        int max = 0;
+        double allowedDeviation = 0f;
+        double pi;
+
+        if (method == PiGenerator.CalculationMethod.ITERATIONS) {
+            max = 500;
+            allowedDeviation = 0.005f;
+        } else if (method == PiGenerator.CalculationMethod.DIGITS) {
+            max = 5;
+            allowedDeviation = 0.0001f;
+        } else if (method == PiGenerator.CalculationMethod.STATIC) {
+            allowedDeviation = 0f;
         } else {
-            double pi = new PiCalculator().calcPiDigits(5);
-            assertTrue("The 5 first decimals of computed Pi (" +
-                    pi +
-                    ") should be correct.", pi == 3.1415);
+            fail("Unsupported calculation method: " + method);
+        }
+
+        pi = calculator.calcPiDigits(max);
+
+        String message = String.format(Locale.US,
+                "Using calculation method %s with max of %d", method, max);
+
+        if (allowedDeviation == 0f) {
+            assertEquals(message + ", calculated value (" + pi + ") does not match PI", Math.PI, pi);
+        } else {
+            assertTrue(message + ", calculated value (" + pi + ") not within bounds (" + allowedDeviation + ")",
+                    pi >= Math.PI - allowedDeviation && pi <= Math.PI + allowedDeviation);
         }
     }
 }
