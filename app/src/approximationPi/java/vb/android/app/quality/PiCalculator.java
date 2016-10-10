@@ -3,9 +3,13 @@ package vb.android.app.quality;
 import vb.android.app.quality.pi.PiGenerator;
 
 /**
- * Very slow class to compute PI.
+ * Slow way to compute PI based on iterations.
  */
 public final class PiCalculator implements PiGenerator {
+    @Override
+    public CalculationMethod getCalculationMethod() {
+        return CalculationMethod.ITERATIONS;
+    }
 
     @Override
     public double calcPiDigits(int max) {

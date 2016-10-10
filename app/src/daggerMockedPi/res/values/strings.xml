@@ -16,7 +16,7 @@
   -->
 
 <resources>
-    <string name="desc_pi">Enter the number of digits to compute for Pi (mocked) : </string>
+    <string name="desc_pi">Enter the number of digits to compute for Pi (mocked) :</string>
     <string name="max_desc">digit(s)</string>
     <string name="algo">mock</string>
 </resources>

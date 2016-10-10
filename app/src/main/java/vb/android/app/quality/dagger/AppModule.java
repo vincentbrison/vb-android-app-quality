@@ -34,6 +34,7 @@ public class AppModule {
 
     /**
      * This module will hold the application context.
+     *
      * @param appContext is the context of the application.
      */
     public AppModule(QualityApplication appContext) {

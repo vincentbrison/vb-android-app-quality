@@ -17,13 +17,36 @@
 package vb.android.app.quality.pi;
 
 /**
- * Interface for generating greeting
+ * Interface for generating Pi
  */
 public interface PiGenerator {
+    enum CalculationMethod {
+        /**
+         * Algorithm based on number of digits
+         */
+        DIGITS,
+        /**
+         * Algorithm based on number of iterations
+         */
+        ITERATIONS,
+        /**
+         * No calculation, return static Math.PI
+         */
+        STATIC,
+    }
+
+    /**
+     * Returns the method of calculation of this generator.
+     *
+     * @return the method of calculation of this generator
+     */
+    CalculationMethod getCalculationMethod();
+
     /**
      * Compute Pi.
+     *
      * @param max is used to parameter the algorithm used for computation (max iteration, max digits...).
      * @return the value of Pi.
      */
-    public double calcPiDigits(int max);
+    double calcPiDigits(int max);
 }

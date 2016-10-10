@@ -19,12 +19,16 @@ package vb.android.app.quality;
 import vb.android.app.quality.pi.PiGenerator;
 
 /**
- * Very slow class to compute PI.
+ * Mock class to return static value of PI.
  */
 public final class PiCalculator implements PiGenerator {
+    @Override
+    public CalculationMethod getCalculationMethod() {
+        return CalculationMethod.STATIC;
+    }
 
     @Override
-    public double calcPiDigits(int maxDigits) {
-        return 3.1415;
+    public double calcPiDigits(int max) {
+        return Math.PI;
     }
 }

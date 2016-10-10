@@ -21,13 +21,13 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.2.3'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+        classpath 'com.android.tools.build:gradle:2.2.0'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
 
-        classpath('com.stanfy.spoon:spoon-gradle-plugin:1.0.2') {
+        classpath('com.stanfy.spoon:spoon-gradle-plugin:1.2.2') {
             exclude module: 'guava'
         }
-        classpath 'com.google.guava:guava:17.0'
+        classpath 'com.google.guava:guava:18.0'
 
     }
 }

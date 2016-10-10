@@ -25,7 +25,6 @@ import vb.android.app.quality.dagger.DaggerAppComponent;
  * Helper to do dagger injection.
  */
 public final class InjectorHelper {
-
     private static AppComponent sApplicationComponent;
 
     private InjectorHelper() {
@@ -33,11 +32,11 @@ public final class InjectorHelper {
 
     /**
      * Init the dagger graph.
-     * @param application is the conttext of the application.
+     *
+     * @param application is the context of the application.
      */
     public static void initializeApplicationComponent(QualityApplication application) {
         sApplicationComponent = DaggerAppComponent.builder().appModule(new AppModule(application)).build();
-
     }
 
     /**

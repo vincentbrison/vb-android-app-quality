@@ -16,19 +16,18 @@
 
 package vb.android.app.quality.rest;
 
-import retrofit.http.GET;
-import retrofit.http.Path;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 import rx.Observable;
 
 /**
  * Describe the REST API with which the app is communicating
  */
-public interface APIInterface {
-
+public interface ApiInterface {
     /**
      * Return the rank of the given performance.
      *
-     * @param algo is the algorythm used to do computation.
+     * @param algo is the algorithm used to do computation.
      * @param time is the time spent during computation.
      * @param max  is the limit used to limit the computation.
      * @return the rank of the given performance.

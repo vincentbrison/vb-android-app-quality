@@ -25,13 +25,12 @@ import java.io.InputStreamReader;
  * Helper to load flat file into strings.
  */
 public final class AssetsHelper {
-
     private AssetsHelper() {
-
     }
 
     /**
      * Return the content of a given asset as a plain string.
+     *
      * @param assetPath is th e path of the given asset (like "file.json", or "dir/file.json").
      * @return the content of the given asset as a plain string.
      * @throws IOException if needed.

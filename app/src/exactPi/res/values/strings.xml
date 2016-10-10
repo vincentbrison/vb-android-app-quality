@@ -16,7 +16,7 @@
   -->
 
 <resources>
-    <string name="desc_pi">Enter the number of digits to compute for Pi : </string>
+    <string name="desc_pi">Enter the number of digits to compute for Pi :</string>
     <string name="max_desc">digit(s)</string>
     <string name="algo">exact</string>
     <string name="url">http://echo.jsontest.com</string>

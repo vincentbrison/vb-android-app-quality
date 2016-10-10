@@ -19,6 +19,7 @@ package vb.android.app.quality.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -28,14 +29,15 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import vb.android.app.quality.InjectorHelper;
 import vb.android.app.quality.R;
 import vb.android.app.quality.pi.PiTask;
-import vb.android.app.quality.rest.APIInterface;
+import vb.android.app.quality.rest.ApiInterface;
 import vb.android.app.quality.rest.ResponseRank;
 
 /**
@@ -53,29 +55,29 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
 
     protected State mState = State.IDLE;
 
-    @InjectView(R.id.textViewName)
+    @BindView(R.id.textViewName)
     protected TextView mTextViewName;
 
-    @InjectView(R.id.textViewValue)
+    @BindView(R.id.textViewValue)
     protected TextView mTextViewValue;
 
-    @InjectView(R.id.buttonCompute)
+    @BindView(R.id.buttonCompute)
     protected Button mButtonCompute;
 
-    @InjectView(R.id.editTextDigits)
+    @BindView(R.id.editTextDigits)
     protected EditText mEditTextDigits;
 
-    @InjectView(R.id.buttonSendPi)
+    @BindView(R.id.buttonSendPi)
     protected Button mButtonSendPi;
 
-    @InjectView(R.id.buttonShareResult)
+    @BindView(R.id.buttonShareResult)
     protected Button mButtonShare;
 
-    @InjectView(R.id.textviewRank)
+    @BindView(R.id.textviewRank)
     protected TextView mTextViewRank;
 
     @Inject
-    protected APIInterface mApi;
+    protected ApiInterface mApi;
 
     protected int mMax;
     protected long mStartTime;
@@ -88,7 +90,7 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
 
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         InjectorHelper.getApplicationComponent().inject(this);
         mButtonSendPi.setEnabled(false);
         mButtonShare.setEnabled(false);
@@ -96,12 +98,17 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
             @Override
             public void onClick(View v) {
                 if (!mState.equals(State.IS_COMPUTING) || mState.equals(State.IS_SENDING)) {
-                    setState(State.IS_COMPUTING);
-                    int digits = Integer.parseInt(mEditTextDigits.getText().toString());
-                    PiTask task = new PiTask(digits, MainActivity.this);
-                    mStartTime = System.currentTimeMillis();
-                    mMax = digits;
-                    task.execute();
+                    if (TextUtils.isEmpty(mEditTextDigits.getText().toString())) {
+                        Toast.makeText(MainActivity.this,
+                                R.string.enter_number_of_digits, Toast.LENGTH_SHORT).show();
+                    } else {
+                        setState(State.IS_COMPUTING);
+                        int digits = Integer.parseInt(mEditTextDigits.getText().toString());
+                        PiTask task = new PiTask(digits, MainActivity.this);
+                        mStartTime = System.currentTimeMillis();
+                        mMax = digits;
+                        task.execute();
+                    }
                 }
             }
         });
@@ -112,7 +119,9 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
                 if (!mState.equals(State.IS_COMPUTING) || mState.equals(State.IS_SENDING)) {
                     setState(State.IS_SENDING);
                     mApi.getRank(getString(R.string.algo), mTime, mMax)
-                            .observeOn(AndroidSchedulers.mainThread()).subscribe(MainActivity.this);
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(MainActivity.this);
                 }
             }
         });
@@ -185,6 +194,6 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
     public void onNext(ResponseRank responseRank) {
         setState(State.IS_RANK_READY);
         mResponseRank = responseRank;
-        mTextViewRank.setText("Your rank is " + responseRank.getRank());
+        mTextViewRank.setText(getString(R.string.your_rank_is, responseRank.getRank()));
     }
 }
