@@ -25,6 +25,7 @@ The followings tools are used:
 - Findbugs
 - PMD
 - Lint
+- Infer
 
 To run these quality tools and get reports, you need to execute the following Gradle command:
 
