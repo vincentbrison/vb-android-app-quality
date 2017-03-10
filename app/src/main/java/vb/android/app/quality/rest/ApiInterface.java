@@ -16,9 +16,9 @@
 
 package vb.android.app.quality.rest;
 
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
-import rx.Observable;
 
 /**
  * Describe the REST API with which the app is communicating

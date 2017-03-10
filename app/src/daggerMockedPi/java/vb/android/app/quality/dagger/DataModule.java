@@ -4,8 +4,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.Observable;
 import retrofit2.http.Path;
-import rx.Observable;
 import vb.android.app.quality.rest.ApiInterface;
 import vb.android.app.quality.rest.ResponseRank;
 

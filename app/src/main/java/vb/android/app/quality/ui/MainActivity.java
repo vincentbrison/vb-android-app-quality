@@ -31,9 +31,10 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import vb.android.app.quality.InjectorHelper;
 import vb.android.app.quality.R;
 import vb.android.app.quality.pi.PiTask;
@@ -180,7 +181,7 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
     }
 
     @Override
-    public void onCompleted() {
+    public void onComplete() {
         setProgressBarIndeterminateVisibility(false);
     }
 
@@ -188,6 +189,10 @@ public class MainActivity extends Activity implements PiTask.PiTaskCallback, Obs
     public void onError(Throwable e) {
         Toast.makeText(this, getString(R.string.network_issue), Toast.LENGTH_SHORT).show();
         setState(State.IS_PI_COMPUTED);
+    }
+
+    @Override
+    public void onSubscribe(Disposable disposable) {
     }
 
     @Override
